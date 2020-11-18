@@ -53,6 +53,7 @@ public class FilePicker: CAPPlugin {
         
     }
     
+    
     @objc func showFilePicker(_ call: CAPPluginCall) {
         let defaults = UserDefaults()
         defaults.set(call.callbackId, forKey: "callbackId")
@@ -86,12 +87,30 @@ extension FilePicker: UIDocumentPickerDelegate {
         
         let pathExtension = urls[0].pathExtension
         
+        //get file size
+        var fileSizeValue: UInt64 = 0
+        do {
+                let fileAttribute: [FileAttributeKey : Any] = try FileManager.default.attributesOfItem(atPath: urls[0].path)
+
+                if let fileNumberSize: NSNumber = fileAttribute[FileAttributeKey.size] as? NSNumber {
+                    fileSizeValue = UInt64(truncating: fileNumberSize)
+                }
+            } catch {
+                print(error.localizedDescription)
+            }
+       
         var ret = JSObject()
         
         ret["uri"] = urls[0].absoluteString
         ret["name"] = urls[0].lastPathComponent
         ret["mimeType"] = getMimeTypeFrom(pathExtension)
         ret["extension"] = pathExtension
+        ret["size"] = fileSizeValue
+        if getMimeTypeFrom(pathExtension).contains("image")  {
+            ret["base64String"] = ""
+        }else{
+            ret["base64String"] = ""
+        }
         call.resolve(ret)
     }
 }
