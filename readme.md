@@ -48,6 +48,8 @@ FilePickerResult
 | name       |         | `string` | The name of the selected file.            |
 | mimeType   |         | `string` | The MIME type of the selected file.       |
 | extension  |         | `string` | The extension of the selected file.       |
+| size       |         | `string` | The size of the selected file.            |
+| base64str  |         | `string` | The base64string for image file.          |
 
 
 ## Android
