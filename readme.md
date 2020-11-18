@@ -23,6 +23,8 @@ FilePicker.showFilePicker({
     const fileName = fileResult.name;
     const fileMimeType = fileResult.mimeType;
     const fileExtension = fileResult.extension;
+    const fileSize = fileResult.size;
+    const base64string = fileResult.base64String; // for image file
   },
   (error) => {
     console.log(error);
