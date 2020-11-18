@@ -3,8 +3,11 @@ package com.epicshaggy.filepicker;
 import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.provider.OpenableColumns;
+import android.util.Base64;
 import android.util.Log;
 import android.webkit.MimeTypeMap;
 
@@ -17,6 +20,9 @@ import com.getcapacitor.PluginMethod;
 
 import org.json.JSONException;
 
+import java.io.ByteArrayOutputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.ArrayList;
 
 @NativePlugin(requestCodes = {FilePicker.FILE_PICK})
@@ -92,12 +98,29 @@ public class FilePicker extends Plugin {
                         Cursor c = getContext().getContentResolver().query(data.getData(), null,null,null,null);
                         c.moveToFirst();
                         String name = c.getString(c.getColumnIndex(OpenableColumns.DISPLAY_NAME));
+                        long size = c.getLong(c.getColumnIndex(OpenableColumns.SIZE));
 
                         JSObject ret = new JSObject();
                         ret.put("uri", data.getDataString());
                         ret.put("name", name);
                         ret.put("mimeType", mimeType);
                         ret.put("extension", extension);
+                        ret.put("size", size);
+                        if(mimeType.contains("image")){
+                            try {
+                                Uri imageUri = data.getData();
+                                InputStream imageStream = getContext().getContentResolver().openInputStream(imageUri);
+                                final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
+                                String encodedImage = encodeImage(selectedImage);
+                                ret.put("base64String",encodedImage);
+                            } catch (FileNotFoundException e) {
+                                e.printStackTrace();
+                                ret.put("base64String", "");
+                            }
+                        }else{
+                            ret.put("base64String", "");
+                        }
+                        System.out.print(ret);
                         call.resolve(ret);
                     }
                 }
@@ -109,7 +132,19 @@ public class FilePicker extends Plugin {
                 call.reject("An unknown error occurred.");
                 break;
         }
+    }
 
-
+    /**
+     * Method to convert bitmap to base64
+     * @param bm
+     * @return
+     */
+    private String encodeImage(Bitmap bm)
+    {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bm.compress(Bitmap.CompressFormat.JPEG,100,baos);
+        byte[] b = baos.toByteArray();
+        String encImage = Base64.encodeToString(b, Base64.DEFAULT);
+        return encImage;
     }
 }
