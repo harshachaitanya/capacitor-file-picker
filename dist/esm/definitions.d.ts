@@ -8,10 +8,12 @@ export declare class FiletTypes {
     static PDF: string;
 }
 export interface FilePickerResult {
-    uri: string;
+     uri: string;
     name: string;
     mimeType: string;
     extension: string;
+    size: string;
+    base64String: string;
 }
 export interface FilePickerPlugin {
     showFilePicker(options?: {
