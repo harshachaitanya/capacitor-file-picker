@@ -52,11 +52,7 @@ public class FilePicker: CAPPlugin {
         }
         
     }
-    
-    
-    func ConvertImageToBase64String (img: UIImage) -> String {
-        return img.jpegData(compressionQuality: 1)?.base64EncodedString() ?? ""
-    }
+   
     
     @objc func showFilePicker(_ call: CAPPluginCall) {
         let defaults = UserDefaults()
