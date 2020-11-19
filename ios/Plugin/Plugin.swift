@@ -54,6 +54,10 @@ public class FilePicker: CAPPlugin {
     }
     
     
+    func ConvertImageToBase64String (img: UIImage) -> String {
+        return img.jpegData(compressionQuality: 1)?.base64EncodedString() ?? ""
+    }
+    
     @objc func showFilePicker(_ call: CAPPluginCall) {
         let defaults = UserDefaults()
         defaults.set(call.callbackId, forKey: "callbackId")
@@ -107,7 +111,10 @@ extension FilePicker: UIDocumentPickerDelegate {
         ret["extension"] = pathExtension
         ret["size"] = fileSizeValue
         if getMimeTypeFrom(pathExtension).contains("image")  {
-            ret["base64String"] = ""
+                let image = UIImage(contentsOfFile: urls[0].path)
+                let imageData: Data? = image!.jpegData(compressionQuality: 0.4)
+                let imageStr = imageData?.base64EncodedString(options: .lineLength64Characters) ?? ""
+                ret["base64String"] = imageStr
         }else{
             ret["base64String"] = ""
         }
