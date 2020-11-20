@@ -33,6 +33,8 @@ public class FilePicker extends Plugin {
         static final String IMAGE = "image";
     }
 
+    private String uploadType = "2";
+
     protected static final int FILE_PICK = 1010;
 
     private String[] getAllowedFileTypes(JSArray fileTypes) {
@@ -69,6 +71,17 @@ public class FilePicker extends Plugin {
     public void showFilePicker(PluginCall call) {
         saveCall(call);
         Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+        Log.d("data11", call.getString("uploadType"));
+        try{
+            if(call.getData().has("uploadType")) {
+                uploadType = call.getString("uploadType");
+            }else{
+                uploadType = "2";
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            uploadType = "2";
+        }
 
         intent.setType("*/*");
 
@@ -106,7 +119,7 @@ public class FilePicker extends Plugin {
                         ret.put("mimeType", mimeType);
                         ret.put("extension", extension);
                         ret.put("size", size);
-                        if(mimeType.contains("image")){
+                        if(uploadType.equalsIgnoreCase("1")){
                             try {
                                 Uri imageUri = data.getData();
                                 InputStream imageStream = getContext().getContentResolver().openInputStream(imageUri);
