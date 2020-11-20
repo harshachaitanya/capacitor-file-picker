@@ -36,7 +36,7 @@ FilePicker.showFilePicker({
 
 | Method                                         | Default | Type                        | Description                                                                       |
 | ---------------------------------------------- | ------- | --------------------------- | --------------------------------------------------------------------------------- |
-| showFilePicker(options: {fileTypes: string[]}) |         | `Promise<FilePickerResult>` | Presents the device's native file picking ui and returns the selected file's uri. |
+| showFilePicker(options: {fileTypes: string[], uploadType: string)}) // uploadType = "1"(to get base64 string with file path) or "2"- only file path |         | `Promise<FilePickerResult>` | Presents the device's native file picking ui and returns the selected file's uri. |
 
 ## Interfaces
 
