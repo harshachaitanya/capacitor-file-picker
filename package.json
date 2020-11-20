@@ -1,6 +1,6 @@
 {
   "name": "capacitor-file-picker",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "This plugin presents the native UI for picking a file.",
   "main": "dist/esm/index.js",
   "types": "dist/esm/index.d.ts",
@@ -10,7 +10,7 @@
     "watch": "tsc --watch",
     "prepublishOnly": "npm run build"
   },
-  "author": "Jose Martinez",
+  "author": "Mantosh Behera",
   "license": "MIT",
   "dependencies": {
     "@capacitor/core": "latest"
@@ -42,9 +42,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/epicshaggy/capaitor-file-picker"
+    "url": "https://github.com/mantoshbehera2019/capacitor-file-picker"
   },
   "bugs": {
-    "url": "https://github.com/epicshaggy/capaitor-file-picker/issues"
+    "url": "https://github.com/mantoshbehera2019/capacitor-file-picker/issues"
   }
 }
