@@ -115,6 +115,12 @@ public class FilePicker extends Plugin {
 
                         JSObject ret = new JSObject();
                         ret.put("uri", data.getDataString());
+                         try{
+                            ret.put("fullFilePath", UriUtils.getPathFromUri(getContext(), data.getData()));
+                        }catch (Exception e){
+                            e.printStackTrace();
+                            ret.put("fullFilePath", "");
+                        }
                         ret.put("name", name);
                         ret.put("mimeType", mimeType);
                         ret.put("extension", extension);
