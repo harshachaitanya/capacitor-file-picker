@@ -125,20 +125,21 @@ public class FilePicker extends Plugin {
                         ret.put("mimeType", mimeType);
                         ret.put("extension", extension);
                         ret.put("size", size);
-                        if(uploadType.equalsIgnoreCase("1")){
-                            try {
-                                Uri imageUri = data.getData();
-                                InputStream imageStream = getContext().getContentResolver().openInputStream(imageUri);
-                                final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
-                                String encodedImage = encodeImage(selectedImage);
-                                ret.put("base64String",encodedImage);
-                            } catch (FileNotFoundException e) {
-                                e.printStackTrace();
-                                ret.put("base64String", "");
-                            }
-                        }else{
-                            ret.put("base64String", "");
-                        }
+//                         if(uploadType.equalsIgnoreCase("1")){
+//                             try {
+//                                 Uri imageUri = data.getData();
+//                                 InputStream imageStream = getContext().getContentResolver().openInputStream(imageUri);
+//                                 final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
+//                                 String encodedImage = encodeImage(selectedImage);
+//                                 ret.put("base64String",encodedImage);
+//                             } catch (FileNotFoundException e) {
+//                                 e.printStackTrace();
+//                                 ret.put("base64String", "");
+//                             }
+//                         }else{
+//                             ret.put("base64String", "");
+//                         }
+                        ret.put("base64String", "");
                         System.out.print(ret);
                         call.resolve(ret);
                     }
