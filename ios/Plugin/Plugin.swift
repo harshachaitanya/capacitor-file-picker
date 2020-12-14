@@ -114,14 +114,15 @@ extension FilePicker: UIDocumentPickerDelegate {
         ret["mimeType"] = getMimeTypeFrom(pathExtension)
         ret["extension"] = pathExtension
         ret["size"] = fileSizeValue
-        if uploadType == "1"  {
-                let image = UIImage(contentsOfFile: urls[0].path)
-                let imageData: Data? = image!.jpegData(compressionQuality: 0.4)
-                let imageStr = imageData?.base64EncodedString(options: .lineLength64Characters) ?? ""
-                ret["base64String"] = imageStr
-        }else{
-            ret["base64String"] = ""
-        }
+//         if uploadType == "1"  {
+//                 let image = UIImage(contentsOfFile: urls[0].path)
+//                 let imageData: Data? = image!.jpegData(compressionQuality: 0.4)
+//                 let imageStr = imageData?.base64EncodedString(options: .lineLength64Characters) ?? ""
+//                 ret["base64String"] = imageStr
+//         }else{
+//             ret["base64String"] = ""
+//         }
+        ret["base64String"] = ""
         call.resolve(ret)
     }
 }
