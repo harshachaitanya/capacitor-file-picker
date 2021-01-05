@@ -1,7 +1,7 @@
 
   Pod::Spec.new do |s|
     s.name = 'CapacitorFilePicker'
-    s.version = '0.0.4'
+    s.version = '0.0.5'
     s.summary = 'This plugin presents the native UI for picking a file.'
     s.license = 'MIT'
     s.homepage = 'https://github.com/mantoshbehera2019/capacitor-file-picker'
