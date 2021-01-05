@@ -179,4 +179,4 @@ extension FilePicker: UIDocumentPickerDelegate {
     }
 
 }
-            if(type.contains("image")){
+           
