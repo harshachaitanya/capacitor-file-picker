@@ -75,18 +75,16 @@ public class FilePicker extends Plugin {
                         long size = c.getLong(c.getColumnIndex(OpenableColumns.SIZE));
 
                         JSObject ret = new JSObject();
-                        ret.put("uri", data.getDataString());
                         try {
-                            ret.put("fullFilePath", UriUtils.getPathFromUri(getContext(), data.getData()));
+                            ret.put("uri", UriUtils.getPathFromUri(getContext(), data.getData()));
                         } catch (Exception e) {
                             e.printStackTrace();
-                            ret.put("fullFilePath", "");
+                            ret.put("uri", data.getDataString());
                         }
                         ret.put("name", name);
                         ret.put("mimeType", mimeType);
                         ret.put("extension", extension);
                         ret.put("size", size);
-                        ret.put("base64String", "");
                         call.resolve(ret);
                     }
                 }
