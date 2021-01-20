@@ -76,7 +76,9 @@ public class FilePicker extends Plugin {
 
                         JSObject ret = new JSObject();
                         try {
-                            ret.put("uri", UriUtils.getPathFromUri(getContext(), data.getData()));
+                            String path = UriUtils.getPathFromUri(getContext(), data.getData());
+                            path = path.startsWith("file://") ? path : "file://"+path;
+                            ret.put("uri", path);
                         } catch (Exception e) {
                             e.printStackTrace();
                             ret.put("uri", data.getDataString());
