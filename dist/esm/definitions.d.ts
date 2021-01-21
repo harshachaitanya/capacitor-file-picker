@@ -13,7 +13,6 @@ export interface FilePickerResult {
     mimeType: string;
     extension: string;
     size: string;
-    base64String: string;
 }
 export interface FilePickerPlugin {
     showFilePicker(options?: {
