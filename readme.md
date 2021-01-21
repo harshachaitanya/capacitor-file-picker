@@ -24,7 +24,6 @@ FilePicker.showFilePicker({
     const fileMimeType = fileResult.mimeType;
     const fileExtension = fileResult.extension;
     const fileSize = fileResult.size;
-    const base64string = fileResult.base64String; // for image file
   },
   (error) => {
     console.log(error);
@@ -49,7 +48,6 @@ FilePickerResult
 | mimeType   |         | `string` | The MIME type of the selected file.       |
 | extension  |         | `string` | The extension of the selected file.       |
 | size       |         | `string` | The size of the selected file.            |
-| base64str  |         | `string` | The base64string for image file.          |
 
 
 ## Android
